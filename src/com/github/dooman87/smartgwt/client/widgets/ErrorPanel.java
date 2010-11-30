@@ -34,7 +34,7 @@ public class ErrorPanel extends VLayout {
         errorPane.setVisible(false);
 
         HLayout buttons = new HLayout();
-        IButton showError = new IButton("Дополнительно");
+        IButton showError = new IButton("Info");
         showError.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
                 errorPane.setVisible(!errorPane.isVisible());
@@ -82,7 +82,7 @@ public class ErrorPanel extends VLayout {
 
     public static void inWindow(String errorText, Throwable error) {
         Window wnd = new Window();
-        wnd.setTitle("Ошибка");
+        wnd.setTitle("Error");
         ErrorPanel panel = new ErrorPanel(errorText, error);
         panel.setMargin(10);
         wnd.addItem(panel);
