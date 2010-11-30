@@ -20,6 +20,7 @@ import com.smartgwt.client.widgets.layout.VLayout;
 public class ErrorPanel extends VLayout {
     private String errorText;
     private Throwable error;
+    private IButton infoButton;
 
     public ErrorPanel(String errorText, Throwable error) {
         this.errorText = errorText;
@@ -34,8 +35,8 @@ public class ErrorPanel extends VLayout {
         errorPane.setVisible(false);
 
         HLayout buttons = new HLayout();
-        IButton showError = new IButton("Info");
-        showError.addClickHandler(new ClickHandler() {
+        infoButton = new IButton("Info");
+        infoButton.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
                 errorPane.setVisible(!errorPane.isVisible());
             }
@@ -43,7 +44,7 @@ public class ErrorPanel extends VLayout {
         buttons.setAlign(Alignment.RIGHT);
         buttons.setLayoutAlign(Alignment.RIGHT);
         buttons.addMember(new LayoutSpacer());
-        buttons.addMember(showError);
+        buttons.addMember(infoButton);
         buttons.setHeight(30);
 
         addMember(errorTextPane);
@@ -80,7 +81,11 @@ public class ErrorPanel extends VLayout {
         return builder.toString();
     }
 
-    public static void inWindow(String errorText, Throwable error) {
+    public void setInfoButtonTitle(String text) {
+        infoButton.setTitle(text);
+    }
+
+    public static ErrorPanel inWindow(String errorText, Throwable error) {
         Window wnd = new Window();
         wnd.setTitle("Error");
         ErrorPanel panel = new ErrorPanel(errorText, error);
@@ -92,5 +97,7 @@ public class ErrorPanel extends VLayout {
         wnd.setShowMinimizeButton(false);
         wnd.show();
         wnd.setTop(5);
+
+        return panel;
     }
 }
