@@ -91,5 +91,6 @@ public class ErrorPanel extends VLayout {
         wnd.setAutoCenter(true);
         wnd.setShowMinimizeButton(false);
         wnd.show();
+        wnd.setTop(5);
     }
 }
